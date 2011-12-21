@@ -103,7 +103,7 @@ end
 get '/ean13/:digits' do
   ean = EAN13.new params[:digits]
   not_found "INVALID EAN13" unless ean.valid?
-  body "VALID EAN13"
+  body "VALID EAN13<br /><a href=\"https://google.com/search?q=%22ean:+#{params[:digits]}%22\">Search for EAN #{params[:digits]}</a>"
 end
 
 get '/ean13' do
