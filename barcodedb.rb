@@ -1,5 +1,5 @@
+Bundler.require
 require 'sinatra'
-require 'rubygems'
 
 class EAN13
 
