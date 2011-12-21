@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>List of EAN13s - <%= @start_at %> to <%= @end_at %></title>
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="Robots" content="index,follow" />
+  </head>
+  <body>
+    <% @start_at.upto(@end_at) do |ean13| %>
+    <% next unless EAN13.new(ean13.to_s.rjust(13, '0')).valid? %>
+    <a href="/ean13/<%= ean13.to_s.rjust(13, '0') %>"><%= ean13.to_s.rjust(13, '0') %></a>
+    <% end %>
+
+    <hr />
+    <% if @start_at > 0 %>
+    <a href="/ean13?page=<%= params[:page] - 1 %>">Previous</a>
+    <% end %>
+
+    <% if @end_at < 9999999999999 %>
+    <a href="/ean13?page=<%= params[:page] + 1 %>">Next</a>
+    <% end %>
+  </body>
+</html>
